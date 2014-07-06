@@ -1,0 +1,109 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Cubbyhole.WP.LoginRegisterPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False"
+    DataContext="{Binding LoginRegisterViewModel, Source={StaticResource Locator}}">
+
+    <!--ContentPanel - placez tout contenu supplémentaire ici-->
+    <Grid x:Name="ContentPanel" Grid.Row="1" Margin="0,0,0,0">
+        <ProgressBar x:Name="ProgressBarUndeterminateLoading" Visibility="Collapsed" IsIndeterminate="True" VerticalAlignment="Top" Margin="0,5,0,0"/>
+        <!--<phone:WebBrowser x:Name="PaypalWebBrower"  Visibility="Collapsed" HorizontalAlignment="Left" Height="776" VerticalAlignment="Top" Width="480" Margin="0,14,0,0"/>-->
+        <!--Contrôle Pivot-->
+        <phone:Pivot x:Name="MainPivot"  Visibility="Visible" Title="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" Margin="0,0,0,0" Foreground="Brown">
+            <!--Élément un de tableau croisé dynamique-->
+            <phone:PivotItem Header="Login" Margin="0,5,0,0" Foreground="White">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Vertical"  Grid.Column="0" Grid.Row="0" Width="Auto"  Margin="0,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <TextBlock Text="Email" FontSize="30" Margin="30,25,30,0"/>
+                        <TextBox   x:Name="LoginEmailTextBox" Grid.Column="0" Grid.Row="0" Width="Auto" Padding="0,0,0,0" Margin="20,0,30,50" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical"  Grid.Column="0" Grid.Row="1" Width="Auto"  Margin="0,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <TextBlock Text="Password" FontSize="30" Margin="30,25,30,0"/>
+                        <PasswordBox x:Name="LoginPasswordBox" Grid.Column="0" Grid.Row="0" Width="Auto" Padding="0,0,0,0" Margin="20,0,30,50" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                    </StackPanel>
+                    <Button  x:Name="LoginButton" Content="Login" Grid.Column="0" Grid.Row="2" Width="Auto"  Margin="30,30,30,30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="LoginButton_Click"/>
+                </Grid>
+            </phone:PivotItem>
+            <phone:PivotItem Header="Register" Margin="12,5,12,0" Foreground="White">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="0.7*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Vertical"  Grid.Column="0" Grid.Row="0" Width="Auto"  Margin="0,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <TextBlock x:Name="Email" Text="Email" FontSize="30" Margin="30,0,30,0"/>
+                        <TextBox x:Name="RegisterEmailTextBox" Grid.Column="0" Grid.Row="0" Width="Auto" Padding="0,0,0,0" Margin="20,0,30,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical"  Grid.Column="0" Grid.Row="1" Width="Auto"  Margin="0,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <TextBlock Text="Password" FontSize="30" Margin="30,0,30,0"/>
+                        <PasswordBox x:Name="RegisterPasswordBox" Grid.Column="0" Grid.Row="0" Width="Auto" Padding="0,0,0,0" Margin="20,0,30,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical"  Grid.Column="0" Grid.Row="2" Width="Auto"  Margin="0,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <TextBlock Text="Password confirmation" FontSize="30" Margin="30,0,30,0"/>
+                        <PasswordBox x:Name="RegisterPasswordBoxConfirmation" Grid.Column="0" Grid.Row="0" Width="Auto" Padding="0,0,0,0" Margin="20,0,30,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="-5,0,-7,0" Grid.Column="0" Grid.Row="3">
+                        <TextBlock Text="Choose a plan" FontSize="30" Margin="35,0,30,0"/>
+                        <ListBox x:Name="PlanListBox"  Margin="-4,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Visible" ItemsSource="{Binding Plans}" Tap="PlanListBox_OnTap" >
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                                    <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <toolkit:WrapPanel  VerticalAlignment="Center" ItemWidth="158" ItemHeight="190"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border MinWidth="100" Margin="0,0,0,0" HorizontalAlignment="Stretch" BorderBrush="WhiteSmoke" CornerRadius="10" BorderThickness="1">
+                                        <StackPanel MinWidth="100" Orientation="Vertical">
+                                            <TextBlock HorizontalAlignment="Center" Text="{Binding Name}" FontSize="25" Margin="5,8,0,0" MaxWidth="215"/>
+                                            <TextBlock Text="{Binding Duration, StringFormat=' {0} days'}" FontSize="25" Margin="5,8,0,0" MaxWidth="215"/>
+                                            <!--<TextBlock FontSize="18" Text="{Binding MaxBandwidth, StringFormat='Bandwidth: {0}Gb/s'}" Margin="5,0,5,0" MaxWidth="215"/>-->
+                                            <TextBlock Text="{Binding MaxStorage, StringFormat='Storage: {0} GB'}" FontSize="20" Margin="5,8,0,0" MaxWidth="215"/>
+                                            <!--<TextBlock Text="{Binding MaxQuotaSHared, StringFormat='Quota {0} GB'}" Margin="5,0,0,0" MaxWidth="215"/>-->
+                                            <TextBlock Text="{Binding Price, StringFormat='Price: {0} €'}" FontSize="25" Margin="5,8,0,0" MaxWidth="215"/>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                    <Button  x:Name="RegisterButton" Content="Register" Grid.Column="0" Grid.Row="4" Width="Auto"  Margin="30,0,30,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="RegisterButton_Click"/>
+                </Grid>
+            </phone:PivotItem>
+        </phone:Pivot>
+    </Grid>
+
+
+</phone:PhoneApplicationPage>

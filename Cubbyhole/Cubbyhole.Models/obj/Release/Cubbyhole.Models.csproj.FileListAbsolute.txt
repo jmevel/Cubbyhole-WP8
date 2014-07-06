@@ -1,0 +1,7 @@
+C:\Users\koenigs\Documents\Visual Studio 2012\Projects\Cubbyhole\Cubbyhole.Models\bin\Release\Cubbyhole.Models.dll
+C:\Users\koenigs\Documents\Visual Studio 2012\Projects\Cubbyhole\Cubbyhole.Models\bin\Release\Cubbyhole.Models.pdb
+C:\Users\koenigs\Documents\Visual Studio 2012\Projects\Cubbyhole\Cubbyhole.Models\bin\Release\Newtonsoft.Json.dll
+C:\Users\koenigs\Documents\Visual Studio 2012\Projects\Cubbyhole\Cubbyhole.Models\bin\Release\Newtonsoft.Json.xml
+C:\Users\koenigs\Documents\Visual Studio 2012\Projects\Cubbyhole\Cubbyhole.Models\obj\Release\Cubbyhole.Models.dll
+C:\Users\koenigs\Documents\Visual Studio 2012\Projects\Cubbyhole\Cubbyhole.Models\obj\Release\Cubbyhole.Models.pdb
+C:\Users\koenigs\Documents\Visual Studio 2012\Projects\Cubbyhole\Cubbyhole.Models\obj\Release\Cubbyhole.Models.csprojResolveAssemblyReference.cache
